@@ -9,8 +9,12 @@ import { authFeatureKey, authReducer } from './app/auth/store/reducers';
 import {provideHttpClient, withInterceptors} from '@angular/common/http'
 import { provideEffects } from '@ngrx/effects';
 import { AuthEffects } from './app/auth/store/effects';
+import { FeedEffects } from './app/shared/components/feed/store/effects'
+import { PopularTagsEffects} from './app/shared/components/popularTags/store/effects'
 import {provideRouterStore, routerReducer} from '@ngrx/router-store'
 import {authInterceptor} from './app/shared/services/authInterceptor'
+import {feedFeatureKey, feedReducer} from './app/shared/components/feed/store/reducers'
+import {popularTagsFeatureKey, popularTagsReducer} from './app/shared/components/popularTags/store/reducer'
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -21,7 +25,9 @@ bootstrapApplication(AppComponent, {
     }),
     provideRouterStore(),
     provideState(authFeatureKey, authReducer),
-    provideEffects(AuthEffects),
+    provideState(feedFeatureKey, feedReducer),
+    provideState(popularTagsFeatureKey, popularTagsReducer),
+    provideEffects(AuthEffects, FeedEffects, PopularTagsEffects),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
