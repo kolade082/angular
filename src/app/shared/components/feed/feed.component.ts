@@ -10,6 +10,7 @@ import {PaginationComponent} from '../pagination/pagination.component'
 import {feedActions} from './store/actions'
 import {selectError, selectFeedData, selectIsLoading} from './store/reducers'
 import {TagListComponent} from '../tagList/tagList.component'
+import {AddToFavoritesComponent} from '../addToFavorites/addToFavorites.component'
 
 
 
@@ -23,6 +24,7 @@ import {TagListComponent} from '../tagList/tagList.component'
     ErrorMessageComponent,
     LoadingComponent,
     PaginationComponent,TagListComponent,
+    AddToFavoritesComponent
   ],
 })
 export class FeedComponent implements OnInit, OnChanges {

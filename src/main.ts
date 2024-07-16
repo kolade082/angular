@@ -11,10 +11,12 @@ import { provideEffects } from '@ngrx/effects';
 import { AuthEffects } from './app/auth/store/effects';
 import { FeedEffects } from './app/shared/components/feed/store/effects'
 import { PopularTagsEffects} from './app/shared/components/popularTags/store/effects'
+import { AddToFavoritesEffect} from './app/shared/components/addToFavorites/store/effects'
 import {provideRouterStore, routerReducer} from '@ngrx/router-store'
 import {authInterceptor} from './app/shared/services/authInterceptor'
 import {feedFeatureKey, feedReducer} from './app/shared/components/feed/store/reducers'
 import {popularTagsFeatureKey, popularTagsReducer} from './app/shared/components/popularTags/store/reducer'
+import {AddToFavoritesService} from './app/shared/components/addToFavorites/services/addToFavorites.service'
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -27,7 +29,7 @@ bootstrapApplication(AppComponent, {
     provideState(authFeatureKey, authReducer),
     provideState(feedFeatureKey, feedReducer),
     provideState(popularTagsFeatureKey, popularTagsReducer),
-    provideEffects(AuthEffects, FeedEffects, PopularTagsEffects),
+    provideEffects(AuthEffects, FeedEffects, PopularTagsEffects, AddToFavoritesEffect),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
@@ -35,5 +37,6 @@ bootstrapApplication(AppComponent, {
       trace: false,
       traceLimit: 75,
     }),
+    AddToFavoritesService,
   ],
 });

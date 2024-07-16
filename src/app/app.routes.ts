@@ -30,4 +30,40 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       import('src/app/tagFeed/tagFeed.routes').then((m) => m.routes),
   },
+
+  {
+    path: 'articles/new',
+    loadChildren: () =>
+      import('src/app/createArticle/createArticle.routes').then((m) => m.routes),
+  },
+
+  {
+    path: 'articles/:slug',
+    loadChildren: () =>
+      import('src/app/article/article.routes').then((m) => m.routes),
+  },
+
+  {
+    path: 'articles/:slug/edit',
+    loadChildren: () =>
+      import('src/app/editArticle/editArticle.routes').then((m) => m.routes),
+  },
+
+  {
+    path: 'settings',
+    loadChildren: () =>
+      import('src/app/settings/settings.routes').then((m) => m.routes),
+  },
+
+  {
+    path: 'profiles/slug',
+    loadChildren: () =>
+      import('src/app/userProfile/userProfile.routes').then((m) => m.routes),
+  },
+
+  {
+    path: 'profiles/:slug/favorites',
+    loadChildren: () =>
+      import('src/app/userProfile/userProfile.routes').then((m) => m.routes),
+  },
 ]

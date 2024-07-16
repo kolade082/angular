@@ -91,4 +91,32 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
+
+  updateCurrentUserEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.updateCurrentUser),
+      switchMap(({currentUserRequest}) => {
+
+        return this.authService.updateCurrentUser(currentUserRequest).pipe(
+          map((currentUser: CurrentUserInterface) => {
+            return authActions.updateCurrentUserSuccess({ currentUser });
+          }),
+          catchError((errorResponse: HttpErrorResponse) => of(authActions.updateCurrentUserFailure({
+            errors: errorResponse.error.errors,
+          })))
+        );
+      })
+    )
+  );
+
+  logoutEffect = createEffect(() =>
+      this.actions$.pipe(
+        ofType(authActions.logout),
+        tap(() => {
+          this.persistanceService.set('accessToken', ''); // Clear the token
+          this.router.navigateByUrl('/'); // Navigate to the login page
+        })
+      ),
+    { dispatch: false }
+  );
 }
